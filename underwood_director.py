@@ -99,7 +99,8 @@ The JSON structure must be:
 
 def analyze_image(image, key):
     genai.configure(api_key=key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    # 모델 이름을 gemini-2.5-flash로 수정하여 안정성 확보
+    model = genai.GenerativeModel('gemini-2.5-flash') 
     
     try:
         response = model.generate_content([
@@ -109,7 +110,7 @@ def analyze_image(image, key):
         return json.loads(response.text)
     except Exception as e:
         st.error(f"AI 분석 중 오류가 발생했습니다: {e}")
-        st.caption("API 키가 유효한지, 또는 이미지 내용이 너무 복잡하여 응답 구조를 맞추지 못하는 것은 아닌지 확인해 주세요.")
+        st.caption("API 키가 유효한지 또는 응답 구조에 문제가 발생한 것은 아닌지 확인해 주세요.")
         return None
 
 # --- UI 로직 ---
